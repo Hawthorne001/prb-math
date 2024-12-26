@@ -26,10 +26,10 @@ import { SD59x18 } from "./ValueType.sol";
 /// @notice Calculates the absolute value of x.
 ///
 /// @dev Requirements:
-/// - x must be greater than `MIN_SD59x18`.
+/// - x > MIN_SD59x18.
 ///
 /// @param x The SD59x18 number for which to calculate the absolute value.
-/// @param result The absolute value of x as an SD59x18 number.
+/// @return result The absolute value of x as an SD59x18 number.
 /// @custom:smtchecker abstract-function-nondet
 function abs(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = x.unwrap();
@@ -75,10 +75,10 @@ function avg(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 /// See https://en.wikipedia.org/wiki/Floor_and_ceiling_functions.
 ///
 /// Requirements:
-/// - x must be less than or equal to `MAX_WHOLE_SD59x18`.
+/// - x ≤ MAX_WHOLE_SD59x18
 ///
 /// @param x The SD59x18 number to ceil.
-/// @param result The smallest whole number greater than or equal to x, as an SD59x18 number.
+/// @return result The smallest whole number greater than or equal to x, as an SD59x18 number.
 /// @custom:smtchecker abstract-function-nondet
 function ceil(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = x.unwrap();
@@ -118,7 +118,7 @@ function ceil(SD59x18 x) pure returns (SD59x18 result) {
 ///
 /// @param x The numerator as an SD59x18 number.
 /// @param y The denominator as an SD59x18 number.
-/// @param result The quotient as an SD59x18 number.
+/// @return result The quotient as an SD59x18 number.
 /// @custom:smtchecker abstract-function-nondet
 function div(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
     int256 xInt = x.unwrap();
@@ -162,7 +162,7 @@ function div(SD59x18 x, SD59x18 y) pure returns (SD59x18 result) {
 ///
 /// Requirements:
 /// - Refer to the requirements in {exp2}.
-/// - x must be less than 133_084258667509499441.
+/// - x < 133_084258667509499441.
 ///
 /// @param x The exponent as an SD59x18 number.
 /// @return result The result as an SD59x18 number.
@@ -197,10 +197,10 @@ function exp(SD59x18 x) pure returns (SD59x18 result) {
 /// @dev See https://ethereum.stackexchange.com/q/79903/24693.
 ///
 /// Notes:
-/// - If x is less than -59_794705707972522261, the result is zero.
+/// - If x < -59_794705707972522261, the result is zero.
 ///
 /// Requirements:
-/// - x must be less than 192e18.
+/// - x < 192e18.
 /// - The result must fit in SD59x18.
 ///
 /// @param x The exponent as an SD59x18 number.
@@ -240,10 +240,10 @@ function exp2(SD59x18 x) pure returns (SD59x18 result) {
 /// counterparts. See https://en.wikipedia.org/wiki/Floor_and_ceiling_functions.
 ///
 /// Requirements:
-/// - x must be greater than or equal to `MIN_WHOLE_SD59x18`.
+/// - x ≥ MIN_WHOLE_SD59x18
 ///
 /// @param x The SD59x18 number to floor.
-/// @param result The greatest whole number less than or equal to x, as an SD59x18 number.
+/// @return result The greatest whole number less than or equal to x, as an SD59x18 number.
 /// @custom:smtchecker abstract-function-nondet
 function floor(SD59x18 x) pure returns (SD59x18 result) {
     int256 xInt = x.unwrap();
@@ -270,7 +270,7 @@ function floor(SD59x18 x) pure returns (SD59x18 result) {
 /// of the radix point for negative numbers.
 /// @dev Based on the odd function definition. https://en.wikipedia.org/wiki/Fractional_part
 /// @param x The SD59x18 number to get the fractional part of.
-/// @param result The fractional part of x as an SD59x18 number.
+/// @return result The fractional part of x as an SD59x18 number.
 function frac(SD59x18 x) pure returns (SD59x18 result) {
     result = wrap(x.unwrap() % uUNIT);
 }
@@ -484,7 +484,7 @@ function log10(SD59x18 x) pure returns (SD59x18 result) {
 /// - Due to the lossy precision of the iterative approximation, the results are not perfectly accurate to the last decimal.
 ///
 /// Requirements:
-/// - x must be greater than zero.
+/// - x > 0
 ///
 /// @param x The SD59x18 number for which to calculate the binary logarithm.
 /// @return result The binary logarithm as an SD59x18 number.
@@ -687,8 +687,8 @@ function powu(SD59x18 x, uint256 y) pure returns (SD59x18 result) {
 /// - The result is rounded toward zero.
 ///
 /// Requirements:
-/// - x cannot be negative, since complex numbers are not supported.
-/// - x must be less than `MAX_SD59x18 / UNIT`.
+/// - x ≥ 0, since complex numbers are not supported.
+/// - x ≤ MAX_SD59x18 / UNIT
 ///
 /// @param x The SD59x18 number for which to calculate the square root.
 /// @return result The result as an SD59x18 number.

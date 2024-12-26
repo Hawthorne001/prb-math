@@ -184,14 +184,16 @@ the source code, which is well-documented with NatSpec comments.
 
 ### Adjacent Value Types
 
-PRBMath provides adjacent value types that serve as abstractions over other vanilla types such as `int64`. The types currently available are:
+PRBMath provides adjacent value types that serve as abstractions over other vanilla types:
 
 | Value Type | Underlying Type |
 | ---------- | --------------- |
 | `SD1x18`   | int64           |
+| `SD21x18`  | int128          |
 | `UD2x18`   | uint64          |
+| `UD21x18`  | uint128         |
 
-These are useful if you want to save gas by using a lower bit width integer, e.g. in a struct.
+These are useful if you want to save gas by using a lower bit width integer, e.g., in a struct.
 
 Note that these types don't have any mathematical functionality. To do math with them, you will have to unwrap them into a simple integer and then to
 the core types `SD59x18` and `UD60x18`.
@@ -390,8 +392,8 @@ You will need the following VSCode extensions:
 
 ## Security
 
-While I set a high bar for code quality and test coverage, you should not assume that this project is completely safe to use. PRBMath has not yet been
-audited by a third-party security researcher.
+The codebase has undergone audits by leading security experts from Cantina and Certora. For a comprehensive list of all audits conducted, see the
+[SECURITY](./SECURITY.md) file.
 
 ### Caveat Emptor
 

@@ -16,10 +16,10 @@ function convert(UD60x18 x) pure returns (uint256 result) {
 /// @notice Converts a simple integer to UD60x18 by multiplying it by `UNIT`.
 ///
 /// @dev Requirements:
-/// - x must be less than or equal to `MAX_UD60x18 / UNIT`.
+/// - x ≤ MAX_UD60x18 / UNIT
 ///
 /// @param x The basic integer to convert.
-/// @param result The same number converted to UD60x18.
+/// @return result The same number converted to UD60x18.
 function convert(uint256 x) pure returns (UD60x18 result) {
     if (x > uMAX_UD60x18 / uUNIT) {
         revert PRBMath_UD60x18_Convert_Overflow(x);

@@ -21,11 +21,17 @@ error PRBMath_UD60x18_Gm_Overflow(UD60x18 x, UD60x18 y);
 /// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in SD1x18.
 error PRBMath_UD60x18_IntoSD1x18_Overflow(UD60x18 x);
 
+/// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in SD21x18.
+error PRBMath_UD60x18_IntoSD21x18_Overflow(UD60x18 x);
+
 /// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in SD59x18.
 error PRBMath_UD60x18_IntoSD59x18_Overflow(UD60x18 x);
 
 /// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in UD2x18.
 error PRBMath_UD60x18_IntoUD2x18_Overflow(UD60x18 x);
+
+/// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in UD21x18.
+error PRBMath_UD60x18_IntoUD21x18_Overflow(UD60x18 x);
 
 /// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in uint128.
 error PRBMath_UD60x18_IntoUint128_Overflow(UD60x18 x);
@@ -33,7 +39,7 @@ error PRBMath_UD60x18_IntoUint128_Overflow(UD60x18 x);
 /// @notice Thrown when trying to cast a UD60x18 number that doesn't fit in uint40.
 error PRBMath_UD60x18_IntoUint40_Overflow(UD60x18 x);
 
-/// @notice Thrown when taking the logarithm of a number less than 1.
+/// @notice Thrown when taking the logarithm of a number less than UNIT.
 error PRBMath_UD60x18_Log_InputTooSmall(UD60x18 x);
 
 /// @notice Thrown when calculating the square root overflows UD60x18.
