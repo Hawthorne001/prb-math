@@ -14,19 +14,16 @@ Solidity library for advanced fixed-point math with signed (SD59x18) and unsigne
 ```
 src/
   Common.sol          # Shared utilities (mulDiv, exp2, log2, pow, sqrt)
-  SD59x18.sol         # Signed 59.18 fixed-point type
-  UD60x18.sol         # Unsigned 60.18 fixed-point type
-  SD1x18.sol          # Signed 1.18 (compact)
-  UD2x18.sol          # Unsigned 2.18 (compact)
-  SD21x18.sol         # Signed 21.18 (medium)
-  UD21x18.sol         # Unsigned 21.18 (medium)
-  sd59x18/            # SD59x18 operations (math, conversions, helpers)
-  ud60x18/            # UD60x18 operations (math, conversions, helpers)
-  casting/            # Type casting between formats
+  SD59x18.sol         # Signed 59.18 fixed-point type (entry point)
+  UD60x18.sol         # Unsigned 60.18 fixed-point type (entry point)
+  SD1x18.sol, UD2x18.sol, SD21x18.sol, UD21x18.sol   # Compact/medium types
+  sd59x18/, ud60x18/  # Core type ops (Casting, Constants, Helpers, Math, ValueType)
+  sd1x18/, ud2x18/, sd21x18/, ud21x18/               # Compact/medium type dirs
+  casting/            # Casting from uint40/uint128/uint256
 test/
   unit/               # Unit tests
   fuzz/               # Fuzz tests
-  utils/              # Test utilities
+  utils/              # Assertions and test utilities
 ```
 
 ## Commands

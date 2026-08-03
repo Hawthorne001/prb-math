@@ -56,7 +56,7 @@ This installation method is not recommended, but it is available for those who p
 First, install the submodule using Forge:
 
 ```shell
-forge install  PaulRBerg/prb-math@release-v4
+forge install PaulRBerg/prb-math@release-v4
 ```
 
 Your `.gitmodules` file should now contain the following entry:
@@ -184,6 +184,7 @@ the source code, which is well-documented with NatSpec comments.
 | `mul`   | `*`      | Fixed-point multiplication                       |
 | `pow`   | N/A      | Power function x^y                               |
 | `powu`  | N/A      | Power function x^y with y simple integer         |
+| `sign`  | N/A      | Sign of the number                               |
 | `sqrt`  | N/A      | Square root                                      |
 
 ### 🔗 Adjacent Value Types
@@ -208,16 +209,21 @@ All PRBMath types have casting functions to and from all other types, including 
 
 | Name          | Description               |
 | ------------- | ------------------------- |
+| `intoInt256`  | Casts a number to int256  |
 | `intoSD1x18`  | Casts a number to SD1x18  |
+| `intoSD21x18` | Casts a number to SD21x18 |
 | `intoSD59x18` | Casts a number to SD59x18 |
 | `intoUD2x18`  | Casts a number to UD2x18  |
+| `intoUD21x18` | Casts a number to UD21x18 |
 | `intoUD60x18` | Casts a number to UD60x18 |
 | `intoUint256` | Casts a number to uint256 |
 | `intoUint128` | Casts a number to uint128 |
 | `intoUint40`  | Casts a number to uint40  |
 | `sd1x18`      | Alias for `SD1x18.wrap`   |
+| `sd21x18`     | Alias for `SD21x18.wrap`  |
 | `sd59x18`     | Alias for `SD59x18.wrap`  |
 | `ud2x18`      | Alias for `UD2x18.wrap`   |
+| `ud21x18`     | Alias for `UD21x18.wrap`  |
 | `ud60x18`     | Alias for `UD60x18.wrap`  |
 
 ### ⚡ Conversion Functions
@@ -239,7 +245,7 @@ In addition to offering mathematical, casting, and conversion functions, PRBMath
 | Name           | Operator | Description               |
 | -------------- | -------- | ------------------------- |
 | `add`          | `+`      | Checked addition          |
-| `and`          | `&`      | Logical AND               |
+| `and`          | `&`      | Bitwise AND               |
 | `eq`           | `==`     | Equality                  |
 | `gt`           | `>`      | Greater than operator     |
 | `gte`          | `>=`     | Greater than or equal to  |
@@ -249,8 +255,8 @@ In addition to offering mathematical, casting, and conversion functions, PRBMath
 | `lte`          | `<=`     | Less than or equal to     |
 | `mod`          | `%`      | Modulo                    |
 | `neq`          | `!=`     | Not equal operator        |
-| `not`          | `~`      | Negation operator         |
-| `or`           | `\|`     | Logical OR                |
+| `not`          | `~`      | Bitwise NOT               |
+| `or`           | `\|`     | Bitwise OR                |
 | `rshift`       | N/A      | Bitwise right shift       |
 | `sub`          | `-`      | Checked subtraction       |
 | `unary`        | `-`      | Checked unary             |
@@ -280,18 +286,18 @@ function addRshiftEq() pure returns (bool result) {
 
 ### ✅ Assertions
 
-PRBMath comes with typed assertions that you can use for writing tests with [PRBTest](https://github.com/PaulRBerg/prb-test), which is based on
-Foundry. This is useful if, for example, you would like to assert that two UD60x18 numbers are equal.
+PRBMath comes with typed assertions that you can use for writing Foundry tests, based on [forge-std](https://github.com/foundry-rs/forge-std). This is
+useful if, for example, you would like to assert that two UD60x18 numbers are equal.
 
 ```solidity
 pragma solidity >=0.8.19;
 
 import { UD60x18, ud } from "@prb/math/src/UD60x18.sol";
-import { Assertions as PRBMathAssertions } from "@prb/math/test/Assertions.sol";
-import { PRBTest } from "@prb/math/src/test/PRBTest.sol";
+import { PRBMathAssertions } from "@prb/math/test/utils/Assertions.sol";
+import { Test } from "forge-std/src/Test.sol";
 
-contract MyTest is PRBTest, PRBMathAssertions {
-  function testAdd() external {
+contract MyTest is Test, PRBMathAssertions {
+  function testAdd() external pure {
     UD60x18 x = ud(1e18);
     UD60x18 y = ud(2e18);
     UD60x18 z = ud(3e18);
@@ -360,6 +366,8 @@ Gas estimations based on the v3.0 release of ABDKMath. See my [abdk-gas-estimati
 Feel free to dive in! [Open](https://github.com/PaulRBerg/prb-math/issues/new) an issue,
 [start](https://github.com/PaulRBerg/prb-math/discussions/new) a discussion or submit a PR.
 
+For repository conventions and common commands, see [AGENTS.md](./AGENTS.md).
+
 ### 📋 Pre Requisites
 
 You will need the following software on your machine:
@@ -373,10 +381,10 @@ In addition, familiarity with [Solidity](https://soliditylang.org/) is requisite
 
 ### ⚙️ Set Up
 
-Clone this repository including submodules:
+Clone this repository:
 
 ```sh
-$ git clone --recurse-submodules -j8 git@github.com:PaulRBerg/prb-math.git
+$ git clone git@github.com:PaulRBerg/prb-math.git
 ```
 
 Then, inside the project's directory, run this to install the Node.js dependencies:
